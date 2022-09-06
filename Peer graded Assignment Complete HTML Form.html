@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<!-- The first thing in any HTML file should be the charset -->
+		<meta charset="utf-8">
+		<!-- Make the page mobile compatible -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Allow installing the app to the homescreen -->
+		<meta name="mobile-web-app-capable" content="yes">
+		
+		<title>Car sale</title>
+		<style>
+		.fullpage {
+			border: 5px solid black;
+			background-color: lightskyblue;
+			text-align: center;
+		  }
+
+		.carPicture {
+			border: 5px solid red;
+		}
+		  
+		  body {
+			  background-color: lightgray;
+		  }
+		  
+		  h1 {
+			  color: navy;
+			  margin-left: 20px;
+		
+		  }
+		  
+		   .Button {  /* button for finishing order*/
+			  background-color: black;
+			  border: none;
+			  color: white;
+			  padding: 15px 32px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+			  margin: 4px 2px;
+			  cursor: pointer;
+		  }
+		  </style>
+		<script>
+function validateFirstName () { //test input for 2-20  allowed characters
+	var fName = document.getElementById("firstName").value;
+	var re1 = /^[a-zA-Z]{2,20}$/;
+	
+	if (re1.test(fName)) { //if input valid show successful green text
+		document.getElementById("firstNamePrompt").style.color = "green";
+		document.getElementById("firstNamePrompt").innerHTML = "<strong>valid</strong>";
+		return true;
+	}
+	else{ //if input not valid show red warning text
+		document.getElementById("firstNamePrompt").style.color = "red";
+		document.getElementById("firstNamePrompt").innerHTML = "<strong>Please input 2-20 letters</strong>";
+		return false;
+	}
+	
+}
+
+function validateLastName () { //test input for 2-20  allowed characters
+	var lName = document.getElementById("lastName").value;
+	var re2 = /^[a-zA-Z]{2,20}$/;
+	
+	if (re2.test(lName)) { //if input valid show successful green text
+		document.getElementById("lastNamePrompt").style.color = "green";
+		document.getElementById("lastNamePrompt").innerHTML = "<strong>valid</strong>";
+		return true;
+	}
+	else{ //if input not valid show red warning text
+		document.getElementById("lastNamePrompt").style.color = "red";
+		document.getElementById("lastNamePrompt").innerHTML = "<strong>Please input 2-20 letters</strong>";
+		return false;
+	}
+	
+}
+
+function validateMail () { // check mail for correct format
+	var mail = document.getElementById("mail").value;
+	var re3 = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+	if (re3.test(mail)) { //if input valid show successful green text
+		document.getElementById("mailPrompt").style.color = "green";
+		document.getElementById("mailPrompt").innerHTML = "<strong>valid</strong>";
+		return true;
+	}
+	else{ //if input not valid show red warning text
+		document.getElementById("mailPrompt").style.color = "red";
+		document.getElementById("mailPrompt").innerHTML = "<strong>Please input valid email example@domain.com>";
+		return false;
+}
+
+}
+
+function validatePhoneNumber () { //test input for 09x-xxx-xxxx phone number
+	var phoneNumber = document.getElementById("phone").value;
+	var re3 = /^\d{3}-\d{3}-\d{3,4}$/;
+	
+	if (re3.test(phoneNumber)) { //if input valid show successful green text
+		document.getElementById("phonePrompt").style.color = "green";
+		document.getElementById("phonePrompt").innerHTML = "<strong>valid</strong>";
+		return true;
+	}
+	else{ //if input not valid show red warning text
+		document.getElementById("phonePrompt").style.color = "red";
+		document.getElementById("phonePrompt").innerHTML = "<strong>Please input 09x-xxx-xxx(x) phone number.</strong>";
+		return false;
+	}
+}
+
+function carModel () { //change car price&picture depending on model
+    
+	if(document.getElementById("Audi").checked) {
+        document.getElementById("price").value = 15000;
+        document.getElementById("carPicture").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Audi_R8_Decennium_Genf_2019_1Y7A5860.jpg/800px-Audi_R8_Decennium_Genf_2019_1Y7A5860.jpg";
+    }
+    if(document.getElementById("BMW").checked) {
+        document.getElementById("price").value = 20000;
+        document.getElementById("carPicture").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/BMW_M135i_xDrive_%28F40%29_at_BMW_Welt_-_front_right_view.jpg/800px-BMW_M135i_xDrive_%28F40%29_at_BMW_Welt_-_front_right_view.jpg";
+    }
+    if(document.getElementById("Mercedes").checked) {
+        document.getElementById("price").value = 25000;
+        document.getElementById("carPicture").src = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Mercedes-Benz-A-Class.jpg/800px-Mercedes-Benz-A-Class.jpg";
+    }
+}
+
+
+function calcOrder () { //do some crazy math
+	var firstName = document.getElementById("firstName").value;
+	var lastName =  document.getElementById("lastName").value;
+	var userName = firstName + " " + lastName
+	var mail = document.getElementById("mail").value;
+	var phone =  document.getElementById("phone").value;
+	var price =  document.getElementById("price").value;
+
+	document.getElementById("orderConfirm").innerHTML = "<h2>Order Summary:</h2>";
+	document.getElementById("orderConfirm").innerHTML += "<p>" + userName + "</br>" + mail + "</br>" + phone +"</p>";
+	document.getElementById("orderConfirm").innerHTML += "<p>Order Total: Euro " + price + "</p>";
+
+}
+
+		</script>
+	</head>
+
+	<body>
+	<div id="fullpage" class="fullpage">
+		<h1>Buy a new car today!</h1>
+		<p>After entering your information that is needed for completing the order of your new car, you can choose among 3 models we currently have and a couple of extra options.</p>
+		<p>Choose any car model to show its picture.</p>
+		<p>Pressing the "Order now" button will show a summary of your order.</p>
+
+		<table id="mainTable" class="mainTable" border="0">
+			<tr>
+				<td class="label_col">First Name:</td>
+				<td class="input_col"><input name="firstName" id="firstName" type="text" onblur="validateFirstName();"></td>
+				<td class="feedback_col"><span id="firstNamePrompt">&nbsp;</span></td>
+			</tr>
+
+			<tr>
+				<td class="label_col">Last Name:</td>
+				<td class="input_col"><input name="lastName" id="lastName" type="text" onblur="validateLastName();"></td>
+				<td class="feedback_col"><span id="lastNamePrompt">&nbsp;</span></td>
+			</tr>
+
+			<tr>
+				<td class="label_col">E-mail:</td>
+				<td class="input_col"><input name="mail" id="mail" type="email" onblur="validateMail();"></td>
+				<td class="feedback_col"><span id="mailPrompt">&nbsp;</span></td>
+			</tr>
+
+			<tr>
+				<td class="label_col">Phone number:</td>
+				<td class="input_col"><input name="phone" id="phone" type="text" value="09" onblur="validatePhoneNumber();"></td>
+				<td class="feedback_col"><span id="phonePrompt">09x-xxx-xxxx</span></td>
+			</tr>
+
+			<tr>
+				<td class="label_col">Car model:</td>
+				<td class="input_col"><input name="model" id="Audi" type="radio" onclick="carModel();">Audi</td>
+                <td class="input_col"><input name="model" id="BMW" type="radio" onclick="carModel();">BMW</td>
+                <td class="input_col"><input name="model" id="Mercedes" type="radio" onclick="carModel();">Mercedes</td>
+			</tr>
+
+            <tr>
+				<td class="label_col">Extras:</td>
+				<td class="input_col"><input name="extras" id="AlloyWheels" type="checkbox">Alloy Wheels</td>
+                <td class="input_col"><input name="extras" id="Sunroof" type="checkbox">Sunroof</td>
+                <td class="input_col"><input name="extras" id="SateliteNavigation" type="checkbox">Satelite navigation</td>
+                <td class="input_col"><input name="extras" id="AndroidEntertainment system" type="checkbox">Android entertainment system</td>
+				<td class="feedback_col"></td>
+			</tr>
+
+			<tr>
+				<td class="label_col">Car Price:</td>
+				<td class="input_col"><input name="price" id="price" type="number" value="0" readonly></td>
+				<td class="feedback_col">EUR</td>
+			</tr>
+
+			<tr>
+				<td class="label_col">Payment:</td>
+				<td class="input_col"><input name="payment" id="payment" type="radio">Cash</td>
+				<td class="input_col"><input name="payment" id="payment" type="radio">Card</td>
+				<td class="feedback_col">&nbsp;</td>
+			</tr>
+
+			<tr>
+				<td class="Button" id="Button" colspan="3"><span class="buttonBG" onclick="calcOrder();">Order Now</span></td>
+			</tr>
+		</table>
+
+        <span id="orderConfirm">&nbsp;</span>
+
+        <a><img id="carPicture" class="carPicture" alt="Car picture shows when model is selected" src=""></a>
+		
+
+	</div>
+		
+	</body>
+
+</html>
