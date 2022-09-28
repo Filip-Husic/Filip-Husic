@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @IT-guy404
+- 👋 Hi, I’m Filip aka @IT-guy404
 - 👀 I’m interested in becoming a software developer
 - 🌱 I’m currently learning to become a junior Java software developer
 - 💞️ I’m looking to collaborate here, eventually maybe freelance 
